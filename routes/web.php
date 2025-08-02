@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Route;
 //     return view("Home.index");
 // });
 
-Route::get('/',[HomeController::class,"index"]);
+Route::get('/',[HomeController::class,"index"]); //facades
 Route::post('/upload_post',[HomeController::class,"upload"]);
 Route::get('/view_post',[HomeController::class,"viewPost"]);
 Route::get('/deletePost/{id}',[HomeController::class,"deletePost"]);
 Route::get('/updatePost/{id}',[HomeController::class,"updatePost"]);
-
+Route::post('/confirmPost/{id}',[HomeController::class,"confirmPost"]);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

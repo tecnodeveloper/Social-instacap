@@ -42,6 +42,21 @@ class HomeController extends Controller
     }
     public function updatePost(Request $request,$id)
     {
-        return view("update-Post");
+        $data = post::find($id);
+        return view("updatePost",compact("data"));
+    }
+    public function confirmPost(Request $request, $id)
+    {
+        $post = post::find($id);
+        $post->Description = $request->description;
+        $post->title = $request->title;
+        $image=$request->image;
+        if($image){
+        $imagename= time().".".$image->getClientOriginalExtension();
+        $request->image->move('post', $imagename);
+        $post->image = $imagename;
+        }
+        $post->save();
+        $post->redirect()->back();
     }
 }
